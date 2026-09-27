@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journey Through The Universe ❤️</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+color:white;
+}
+
+.screen{
+display:none;
+text-align:center;
+width:90%;
+max-width:700px;
+}
+
+.active{
+display:block;
+}
+
+button{
+padding:12px 25px;
+margin-top:20px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+background:#ff4d6d;
+color:white;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+.door-container{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.door{
+width:140px;
+height:180px;
+background:#8b5a2b;
+border:5px solid #5c3a1e;
+border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:20px;
+cursor:pointer;
+transition:.4s;
+}
+
+.door:hover{
+transform:scale(1.1);
+}
+
+.photo{
+width:220px;
+height:220px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid pink;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{
+box-shadow:0 0 10px pink;
+}
+to{
+box-shadow:0 0 40px pink;
+}
+}
+
+.envelope{
+font-size:120px;
+cursor:pointer;
+transition:.4s;
+}
+
+.envelope:hover{
+transform:scale(1.1);
+}
+
+#letter{
+white-space:pre-line;
+line-height:1.8;
+font-size:18px;
+}
+
+.heart{
+position:absolute;
+font-size:25px;
+animation:float 5s linear infinite;
+}
+
+@keyframes float{
+from{
+transform:translateY(100vh);
+opacity:1;
+}
+to{
+transform:translateY(-100px);
+opacity:0;
+}
+}
+
+.finalText{
+font-size:40px;
+color:#ff80ab;
+font-weight:bold;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+50%{
+transform:scale(1.1);
+}
+}
+
+</style>
+</head>
+<body>
+<div id="screen1" class="screen active">
+    <h1>🌌 Welcome Traveller</h1>
+    <p>A special journey is waiting for you...</p>
+    <button onclick="showScreen(2)">Start Journey 🚀</button>
+</div>
+
+<div id="screen2" class="screen">
+    <h1>🚪 Choose A Door</h1>
+
+    <div class="door-container">
+
+        <div class="door" onclick="showScreen(3)">
+            Memory
+        </div>
+
+        <div class="door" onclick="showScreen(3)">
+            Smile
+        </div>
+
+        <div class="door" onclick="showScreen(3)">
+            Destiny
+        </div>
+
+    </div>
+</div>
+
+<div id="screen3" class="screen">
+
+    <h1>✨ A Rare Person Appears ✨</h1>
+
+    <img src="Photo.jpg" class="photo">
+
+    <p style="margin-top:20px;">
+        Some people enter our lives...
+        and become unforgettable.
+    </p>
+
+    <button onclick="showScreen(4)">
+        Continue ❤️
+    </button>
+
+</div>
+
+<div id="screen4" class="screen">
+
+    <h1>💌 A Letter Has Arrived</h1>
+
+    <div class="envelope" onclick="openLetter()">
+        📩
+    </div>
+
+    <p>Click the envelope</p>
+
+</div>
+
+<div id="screen5" class="screen">
+
+    <h1>💖 Special Letter</h1>
+
+    <p id="letter"></p>
+
+    <button onclick="showFinal()">
+        Final Surprise ✨
+    </button>
+
+</div>
+
+<div id="screen6" class="screen">
+
+    <div class="finalText">
+        🌸 YOU ARE ONE OF A KIND 🌸
+    </div>
+
+    <br><br>
+
+    <p id="finalMessage"></p>
+
+</div>
+<script>
+
+function showScreen(num){
+
+document.querySelectorAll(".screen").forEach(screen=>{
+screen.classList.remove("active");
+});
+
+document.getElementById("screen"+num).classList.add("active");
+
+}
+
+function openLetter(){
+
+showScreen(5);
+
+typeLetter();
+
+}
+
+const text = `Haraminnnn Ichhiiiii ❤️
+
+Out of billions of people,
+our paths crossed.
+
+Some friendships happen by chance,
+but become unforgettable memories.
+
+Thank you for all the laughs,
+the support,
+the memories,
+and the kindness.
+
+No matter where life goes,
+you'll always be someone special.
+
+🌸✨❤️`;
+
+let i = 0;
+
+function typeLetter(){
+
+const letter = document.getElementById("letter");
+
+letter.innerHTML = "";
+
+i = 0;
+
+function type(){
+
+if(i < text.length){
+
+letter.innerHTML += text.charAt(i);
+
+i++;
+
+setTimeout(type,40);
+
+}
+
+}
+
+type();
+
+}
+
+function showFinal(){
+
+showScreen(6);
+
+document.getElementById("finalMessage").innerHTML =
+"Thank You For Being Part Of My Universe ❤️";
+
+createHearts();
+
+}
+
+function createHearts(){
+
+for(let i=0;i<100;i++){
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML=Math.random()>0.5 ? "💖" : "✨";
+
+heart.style.left=Math.random()*100+"%";
+
+heart.style.animationDuration=
+(Math.random()*4+3)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},7000);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
